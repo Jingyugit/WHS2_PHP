@@ -1,0 +1,48 @@
+CREATE TABLE `test_user` (
+   `useridx` int NOT NULL AUTO_INCREMENT,
+   `userid` varchar(300) NOT NULL,
+   `userpw` varchar(300) NOT NULL,
+   `username` varchar(300) NOT NULL,
+   `userphone` varchar(300) NOT NULL,
+   `useremail` varchar(300) DEFAULT NULL,
+   `regdate` datetime DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (`useridx`),
+   UNIQUE KEY `userid` (`userid`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3
+
+CREATE TABLE `test_board` (
+   `board_idx` int NOT NULL AUTO_INCREMENT,
+   `board_title` varchar(300) NOT NULL,
+   `board_content` varchar(500) NOT NULL,
+   `board_path` varchar(300) DEFAULT NULL,
+   `regdate` datetime DEFAULT CURRENT_TIMESTAMP,
+   `board_filename` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`board_idx`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3
+
+0 row(s) affected, 1 warning(s):
+ 1681 Integer display width is deprecated and will be removed in a future release.
+ Records: 0  Duplicates: 0  Warnings: 1
+
+create table test_chat(
+	chat_idx int primary key auto_increment,
+    chat_id int,
+    chat_content text not null,
+    chat_date datetime default now(),
+    chat_hits int,
+    chat_like int
+);
+
+$stmt = mysqli_prepare($conn, "INSERT INTO test_chat (chat_content, chat_id, chat_user, chat_date) VALUES (?, ?, ?, now())");
+mysqli_stmt_bind_param($stmt, 'sis', $chatContent, $boardIdx, $chatUser);
+$result = mysqli_stmt_execute($stmt);
+
+if (!$result) {
+    echo "error" . mysqli_stmt_error($stmt);
+} else {
+    // 성공 메시지 및 리디렉션
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+    
